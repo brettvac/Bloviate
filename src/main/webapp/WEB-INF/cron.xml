@@ -2,9 +2,9 @@
 <cronentries>
 
   <cron>
-     <url>/cron/BlogServlet</url>
-     <description>Update the Blog</description> 
-     <schedule>every 29 minutes</schedule>
+     <url>/cron/PostToBloggerServlet</url>
+     <description>Update Blogger via Bloviate</description> 
+     <schedule>every 696 hours</schedule>
      <timezone>America/New_York</timezone>
   </cron>
   
