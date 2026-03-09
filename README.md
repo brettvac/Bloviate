@@ -66,7 +66,7 @@ Post content is retrieved from a static file.
 7. Deploy Bloviate to Google App Engine.
     1. Run `gcloud auth login` and log in with your Google account.
     2. Run `gcloud config set [YOUR_PROJECT_ID]` with your Google App Engine project ID you noted earlier.
-    2. Deploy to GAE using `mvn package appengine:deploy -Dapp.deploy.projectId=[YOUR_PROJECT_ID]` again using your GAE project ID.
+    2. Deploy to GAE using `mvn package appengine:deploy`.
     3. Go back to Step 3.8 and add your callback URL.
 
 ----------
