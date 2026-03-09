@@ -8,6 +8,7 @@
     <max-instances>1</max-instances>
   </automatic-scaling>
   <sessions-enabled>false</sessions-enabled>
+  <version>GCLOUD_CONFIG</version>
 
   <!-- Configure java.util.logging -->
   <system-properties>
