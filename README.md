@@ -1,8 +1,8 @@
 # Bloviate — A bot running on GAE that posts to Blogger
 
-Bloviate is a collection of servlets running on Google App Engine. 
+Bloviate is a collection of servlets running on Google App Engine that automatically posts to Blogger.
 
-The bot includes a servlet called by a cron job, which automatically posts to a blog hosted by Blogger by using the Blogger API to post to Blogger. 
+The bot includes a servlet called by a cron job, which automatically posts to a blog hosted by Blogger by using the Blogger API. 
 
 In addition, the main servlet displays a form and handles the authentication through OAuth for first-time use.
 
@@ -35,7 +35,7 @@ Post content is retrieved from a static file.
     
 2. Create a Google App Engine application for Bloviate
     1. Go to https://console.cloud.google.com/appengine and click "Create project"
-    2. Name the project "Bloviate"
+    2. Name the project "Bloviate" (mandatory)
     3. Take note of the project ID—it's generated automatically.
 
 3. Create an OAuth Client ID and Secret so that Bloviate can authenticate and post to Blogger.
@@ -69,10 +69,10 @@ Post content is retrieved from a static file.
     2. Deploy to GAE using `mvn package appengine:deploy`.
     3. Go back to Step 3.8 and add your callback URL.
 
-----------
+---
 
-## Cutomization
+## Customization
+For first-time users The BloviateServlet displays a form which accepts the Blog ID (previously in the properties file) as well as the OAuth keys (also previously located inside a file).
+These keys are stored in the Datastore.
 
 You can set the frequency of the posting to the blog in the `cron.xml` file.
-
-You can change the content of the posts by adding or removing sentences to the `bloviate.txt` file, or creating your own logic to generate post content.
