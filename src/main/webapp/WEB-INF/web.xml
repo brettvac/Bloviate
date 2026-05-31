@@ -39,9 +39,11 @@
       <url-pattern>/cron/*</url-pattern>
     </web-resource-collection>
     <user-data-constraint>
-      <transport-guarantee>CONFIDENTIAL</transport-guarantee> </user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
+    </user-data-constraint>
     <auth-constraint>
-      <role-name>admin</role-name> </auth-constraint>
+      <role-name>admin</role-name> 
+    </auth-constraint>
   </security-constraint>
 
   <welcome-file-list>

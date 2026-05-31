@@ -1,7 +1,6 @@
 /*
- * Copyright (c) 2026 Brett Vachon
+ * Bloviate Copyright (c) 2017-2026 Brett
  * Licensed under the Apache License, Version 2.0
- * See the LICENSE file in the project root for details.
  */
 
 package io.github.brettvac.bloviate;

@@ -1,7 +1,6 @@
 /*
- * Copyright (c) 2026 Brett Vachon
+ * Bloviate Copyright (c) 2017-2026 Brett
  * Licensed under the Apache License, Version 2.0
- * See the LICENSE file in the project root for details.
  */
 
 package io.github.brettvac.bloviate;
@@ -27,12 +26,22 @@ import com.google.appengine.api.datastore.KeyFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.stream.Stream;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
 public class BloviateService {
 
+    public static final String file = "WEB-INF/StaticFiles/bloviate.txt";  //Static file containing the blog post content
+    
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     public static GoogleAuthorizationCodeFlow flow;
@@ -130,8 +139,11 @@ public class BloviateService {
 
         Post content = new Post();
         
+        //TODO: Remake the post creation algorithm to use Wordnik by translating the Python script
+        
         //Retrieve a random line from our content file
-        String line = PostToBloggerServlet.getLine();
+        //String line = PostToBloggerServlet.getLine();
+        String line = getLine(); 
  
         //Set the title as the first sentence of the line
         content.setTitle(line.substring(0, line.indexOf('.')).trim());
@@ -147,5 +159,32 @@ public class BloviateService {
         output.append("Successfully posted to blog: ").append(blogId).append("\n");
         output.append("Published at: ").append(post.getPublished().toString()).append("\n");
         output.append("Content:<br>").append(post.getContent()).append("<br>");
+    }
+    
+    /**
+     * Helper function to return a random line from a file of unknown file length using a reservoir sampling algorithm
+     * @return randline Random line from file
+     */
+    public static String getLine() throws IOException {
+      int numLines = 1;
+      String randLine = "";
+      Random rand = new Random();
+
+      try (Stream<String> lines = Files.lines(Path.of(file))) {
+         Iterator<String> it = lines.iterator();
+
+         while (it.hasNext()) {
+            String buf = it.next();
+
+            if (rand.nextInt(numLines++) == 0) {
+                randLine = buf;
+            }
+         }
+
+      } catch (NoSuchFileException e) {
+          throw new FileNotFoundException("File not found: " + file);
+      }
+
+      return randLine;
     }
 }
