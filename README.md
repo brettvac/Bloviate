@@ -6,6 +6,13 @@ The bot includes a servlet called by a cron job, which automatically posts to a 
 
 In addition, the main servlet displays a form and handles the authentication through OAuth for first-time use.
 
+### Workflow
+*BloviateServlet* when first run will authenticate the user by first collecting the Blog ID, OAuth Client ID and OAuth CLient secret, and then start the authentication process.
+
+After authenticating with Google and granting access to the app, it will start posting. 
+
+When you visit *BloviateServlet* after authentication using the OAuth process, the servlet will simply display a confirmation that authentication worked, and allow a post to be created on demand.    
+
 ## Origins of Bloviate
 
 This bot was written with the original intent that the posts would show up on Twitter, using IFTTT to copy the content which was posted to the blog to a connected Twitter account. 
