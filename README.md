@@ -69,7 +69,7 @@ Post content is retrieved from a static file.
     2. Deploy to GAE using `mvn package appengine:deploy`.
     3. Go back to Step 3.8 and add your callback URL.
 
-For more Google commands see the [wiki](https://github.com/brettvac/Bloviate/wiki)
+For more Google commands see the [wiki](https://github.com/brettvac/Bloviate/wiki).
 
 ---
 
