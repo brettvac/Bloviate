@@ -26,14 +26,14 @@ For more improvements and the changelog [see the wiki](https://github.com/brettv
 
 ## Setting Up Bloviate
 
-1. Create a blog on Blogger that Bloviate will post to
+1. Create a blog on Blogger that Bloviate will post to.
     1. Go to https://www.blogger.com/dashboard/ and click "Create a blog".
     2. Log into your Google account
     3. Choose a Title and a URL for the blog
     4. Click Create
     5. Take note of the Blog ID—it's the 19 digit number that appears after the blogger.com URL.
     
-2. Create a Google App Engine application for Bloviate
+2. Create a Google App Engine application for Bloviate.
     1. Go to https://console.cloud.google.com/appengine and click "Create project"
     2. Name the project "Bloviate" (mandatory)
     3. Take note of the project ID—it's generated automatically.
@@ -50,16 +50,16 @@ For more improvements and the changelog [see the wiki](https://github.com/brettv
     9. Click Create
     10. Take note of the Client ID and Client Secret.
 
-4. Add a test user to your OAuth application
+4. Add a test user to your OAuth application.
     1. Go to https://console.cloud.google.com/auth/audience and choose your project
     2. Under Test users, click Add users
     3. Add your Google account e-mail and click save.
 
-5. Enable the Blogger API so Bloviate can post
+5. Enable the Blogger API so Bloviate can post.
     1. Go to https://console.developers.google.com/apis/api/blogger.googleapis.com/
     2. Click Enable
 
-6. Test Bloviate on your local server 
+6. Test Bloviate on your local server.
     1. From the project root, run `mvn package appengine:run` 
     2. Visit http://localhost:8080/ to test that Bloviate works.
 
