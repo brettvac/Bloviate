@@ -27,6 +27,8 @@
   
   <env-variables>
     <env-var name="APP_NAME" value="Bloviate" /> 
+    <env-var name="BLOVIATE_WORDS" value="WEB-INF/StaticFiles/comp60words.txt" />
+    <env-var name="HARSH_WORDNIK_API_KEY" value="d053bbc7133e1b036d17c0d4e120ae00f782def62a093010d" />
   </env-variables>  
   
 </appengine-web-app>

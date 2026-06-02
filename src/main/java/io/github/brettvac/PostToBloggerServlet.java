@@ -16,6 +16,7 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.KeyFactory;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Servlet getting an Access and Refresh Token from the Callback Handler Servlet (if needed)
@@ -38,7 +39,16 @@ public class PostToBloggerServlet extends HttpServlet {
             String refreshToken = (String) oauthTokenEntity.getProperty("OAuthRefreshToken");
        
             //Pass the retrieved tokens to the Service class which contains the business logic
-            BloviateService.postToBlogger(accessToken, refreshToken, response.getWriter());
+            Map<String, Object> result = BloviateService.postToBlogger(accessToken, refreshToken);
+
+            // Log to App Engine logs (important for cron visibility)
+            System.out.println("Bloviate cron post success:");
+            System.out.println("Blog ID: " + result.get("blogId"));
+            System.out.println("Title: " + result.get("title"));
+            System.out.println("URL: " + result.get("url"));
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().write("OK");
             
         } catch (EntityNotFoundException e) {
             // Handle the case where the Cron job fires but the user hasn't authenticated yet
