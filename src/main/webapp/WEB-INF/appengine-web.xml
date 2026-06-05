@@ -15,11 +15,13 @@
     <property name="appengine.use.EE8" value="true"/>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
   </system-properties>
-  
+
+  <!-- Resource file directory -->  
   <resource-files>
     <include path="WEB-INF/StaticFiles/*" />
   </resource-files> 
-  
+
+  <!-- Static Files -->    
   <static-files>
     <include path="index.html" />
     <include path="favicon.ico" />
