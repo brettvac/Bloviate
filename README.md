@@ -75,9 +75,9 @@ For more improvements and the changelog [see the wiki](https://github.com/brettv
     2. Run `gcloud config set project [YOUR_PROJECT_ID]` replacing the placeholder with your Google App Engine project ID for Bloviate that you noted earlier.
     3. Run `gcloud app create --region=us-central --project [YOUR_PROJECT_ID]` again using the placeholder value
     4. Deploy to GAE using `mvn package appengine:deploy`. Take note of your cloud app URL which ends in appspot.com.
-    5. Go to https://console.cloud.google.com/apis/credentials, find *Bloviate* under *OAuth 2.0 Client IDs* inside your project and click the pencil icon to edit.
+    5. Go to https://console.cloud.google.com/apis/credentials, find *Bloviate* under *OAuth 2.0 Client IDs* inside your project, and click the pencil icon to edit.
     6. Under *Authorized redirect URIs* click *+Add URI*
-    7. Add your callback URL (the URL noted in step 4 followed by `oauth2callback`. Press save.
+    7. Add your callback URL (the URL noted in step 4) followed by `oauth2callback`. Press save.
 
 For more Google commands [see the wiki](https://github.com/brettvac/Bloviate/wiki/Google-Cloud-SDK-Command-Prompts).
 
