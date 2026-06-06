@@ -1,0 +1,5 @@
+cron:
+- description: "Update Blogger via Bloviate"
+  url: /cron/PostToBloggerServlet
+  schedule: every 233 hours
+  timezone: UTC
