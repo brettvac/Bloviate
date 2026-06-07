@@ -1,8 +1,3 @@
-/*
- * Bloviate Copyright (c) 2017-2026 Brett
- * Licensed under the Apache License, Version 2.0
- */
-
 package io.github.brettvac.bloviate;
 
 import javax.servlet.http.HttpServlet;
@@ -16,54 +11,45 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.KeyFactory;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
-
-/**
- * Servlet getting an Access and Refresh Token from the Callback Handler Servlet (if needed)
- * and using those credentials to post to Blogger
- */
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @SuppressWarnings("serial")
 public class PostToBloggerServlet extends HttpServlet {
+
+    private static final Logger log = Logger.getLogger(PostToBloggerServlet.class.getName());
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("text/plain; charset=UTF-8");
 
-        PrintWriter out = response.getWriter();
-
         try {
 
             DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-            // Retrieve the saved OAuth tokens from Datastore
-            Entity oauthTokenEntity = datastore.get(KeyFactory.createKey("OAuthTokenEntity", "OA"));
-
-            String accessToken = (String) oauthTokenEntity.getProperty("OAuthAccessToken");
-            String refreshToken = (String) oauthTokenEntity.getProperty("OAuthRefreshToken");
-
-            // Pass the retrieved tokens to the Service class which contains the business logic
-            Map<String, Object> result = BloviateService.postToBlogger(
-                accessToken,
-                refreshToken
+            Entity oauthTokenEntity = datastore.get(
+                    KeyFactory.createKey("OAuthTokenEntity", "OA")
             );
 
-            // Log output
-            out.println("Bloviate cron post success:");
-            out.println("Blog ID: " + result.get("blogId"));
-            out.println("Title: " + result.get("title"));
-            out.println("URL: " + result.get("url"));
+            Map<String, Object> result = BloviateService.postToBlogger(
+                    (String) oauthTokenEntity.getProperty("OAuthAccessToken"),
+                    (String) oauthTokenEntity.getProperty("OAuthRefreshToken")
+            );
+
+            log.info("Bloviate cron post success | " + "Blog ID=" + result.get("blogId") + " | " + "Title=" + result.get("title") + " | " + "URL=" + result.get("url"));
 
             response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println("OK");
 
         } catch (EntityNotFoundException e) {
 
-            // Handle the case where the Cron job fires but the user hasn't authenticated yet
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            log.log(Level.SEVERE,
+                    "OAuth tokens not found in Datastore. User must re-authenticate.", e);
 
-            out.println("Error: OAuth tokens not found in Datastore. Run the setup in the main BloviateServlet first.");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().println("OK");
         }
     }
 }
